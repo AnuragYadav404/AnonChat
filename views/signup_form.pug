@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  .signup-info 
+    p Make sure your username is unique! 
+    p Password must be atleast 6 characters long 
+  
+  form(action="", method="post") 
+    .form-group 
+        label(for="username") Enter a unique username: 
+        input#username.form-control(type="text", placeholder="Enter your unique username", name="username", required="true")
+
+    .form-group 
+        label(for="password") Enter your password: 
+        input#password.form-control(type="password", placeholder="Enter your password", name="password", required="true")
+ 

@@ -1,4 +1,5 @@
 exports.chat_get = function (req, res, next) {
+  // this will require database query operations
   res.send("This implements the chat get.");
 };
 

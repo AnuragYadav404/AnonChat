@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  
+  form(action="", method="post") 
+    .form-group 
+        label(for="username") Username: 
+        input#username.form-control(type="text", placeholder="Enter your unique username", name="username", required="true")
+
+    .form-group 
+        label(for="password") Password: 
+        input#password.form-control(type="password", placeholder="Enter your password", name="password", required="true")
+      
+        
