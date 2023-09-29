@@ -22,8 +22,6 @@ exports.chat_get = asyncHandler(async function (req, res, next) {
     messages,
     user: req.user,
   });
-
-  res.send("This implements the chat get.");
 });
 
 // this handles chat post request
