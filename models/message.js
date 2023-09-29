@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const messageSchema = new Schema({
   content: { type: String, required: true, maxLength: 2000 },
   anon_user: { type: Schema.Types.ObjectId, ref: "AnonUser", required: true },
+  createdAt: { type: Date, required: true },
 });
 
 const Message = connection.model("Message", messageSchema);

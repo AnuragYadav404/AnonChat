@@ -4,6 +4,7 @@ const homeController = require("../controllers/homeController");
 const loginController = require("../controllers/loginController");
 const signupController = require("../controllers/signupController");
 const chatController = require("../controllers/chatController");
+const logoutController = require("../controllers/logoutController");
 
 /* GET home page. */
 router.get("/", homeController.homepage_get);
@@ -16,6 +17,7 @@ router.get("/login", loginController.login_get);
 
 router.post("/login", loginController.login_post);
 
+router.post("/logout", logoutController.logout_post);
 //\n It display all the messages, login button, sign up button.\n This page also presents a message form if the user is authenticated.
 
 router.get("/chat", chatController.chat_get);
