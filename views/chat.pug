@@ -6,10 +6,9 @@ block content
     form(action="/logout", method="post") 
         button(type="submit") Logout
   else 
-    form(action="/login", method="post") 
-        button(type="submit") Log In
-    form(action="/signup", method="post") 
-        button(type="submit") Sign up
+    p #[strong You must be logged in to view message authors]
+    p To sign-up visit:- #[a(href="/signup") Sign up ]
+    p To login visit:- #[a(href="/login") Log In] 
     
   form(action="", method="post") 
     label(for="content") Send Message: 
@@ -24,4 +23,7 @@ block content
   hr
 
   each message in messages
-    p Message: #{message.content} by #[strong message.anon_user.username]
+    if user
+      p Message: #{message.content} by #[strong #{message.anon_user.username}]
+    else 
+      p Message: #{message.content}

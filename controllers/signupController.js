@@ -30,17 +30,20 @@ exports.signup_post = [
     .escape(),
   asyncHandler(async function (req, res, next) {
     const errors = validationResult(req);
-    if (errors) {
+    if (!errors.isEmpty()) {
+      console.log("errors");
+      console.log(errors.array());
       return res.render("signup_form", {
         title: "Sign up for AnonChat",
         errors: errors.array(),
       });
     } else {
       // here i will also have to check whether this username is in use or not
-      const existUser = AnonUser.findOne({
+      const existUser = await AnonUser.findOne({
         username: req.body.username,
       }).exec();
       if (existUser) {
+        console.log("user exists");
         return res.render("signup_form", {
           title: "Sign up for AnonChat",
           errors: [
@@ -48,6 +51,7 @@ exports.signup_post = [
           ],
         });
       } else {
+        console.log("creating user");
         const { salt, hash } = genPassword(req.body.password);
         const newUser = new AnonUser({
           username: req.body.username,
@@ -55,6 +59,7 @@ exports.signup_post = [
           hash: hash,
         });
         await newUser.save();
+        console.log("user created");
         return res.redirect("/login");
       }
     }

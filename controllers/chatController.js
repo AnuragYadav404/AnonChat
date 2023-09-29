@@ -13,7 +13,7 @@ exports.chat_get = asyncHandler(async function (req, res, next) {
   // user specific info will also decide on display of message field
   const messages = await Message.find()
     .populate("anon_user")
-    .sort({ createdAt: 1 });
+    .sort({ createdAt: -1 });
   return res.render("chat", {
     title: "Anon Chat Space",
     messages,
@@ -32,7 +32,7 @@ exports.chat_post = [
     .escape(),
   asyncHandler(async function (req, res, next) {
     const error = validationResult(req);
-    if (error) {
+    if (!error.isEmpty()) {
       const messages = await Message.find()
         .populate("anon_user")
         .sort({ createdAt: 1 });
