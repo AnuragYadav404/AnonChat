@@ -1,4 +1,4 @@
-const asyncHandler = require("async-handler");
+const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const connection = require("../config/db_connection");
 const AnonUser = connection.models.AnonUser;

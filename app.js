@@ -6,6 +6,9 @@ const logger = require("morgan");
 const connection = require("./config/db_connection");
 const AnonUser = require("./models/anon_user");
 const Message = require("./models/message");
+const MongoStore = require("connect-mongo");
+const session = require("express-session");
+const passport = require("passport");
 
 const indexRouter = require("./routes/index");
 const app = express();
@@ -19,6 +22,35 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+//session setup
+/**
+ * -------------- SESSION SETUP ----------------
+ */
+
+// TODO
+// gotta implement the session
+// first set up the sessionStore
+const sessionStore = MongoStore.create({
+  client: connection.getClient(),
+  collectionName: "sessions",
+});
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, //24 hours age cookie
+    },
+  })
+);
+
+require("./config/passport");
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(
   "/",

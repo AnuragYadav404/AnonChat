@@ -1,8 +1,7 @@
 const connection = require("../config/db_connection");
 const Message = connection.models.Message;
-const asyncHandler = require("async-handler");
-const { body } = require("async-handler");
-const { validationResult } = require("express-validator");
+const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 exports.chat_get = asyncHandler(async function (req, res, next) {
   // this will require database query operations
@@ -12,11 +11,9 @@ exports.chat_get = asyncHandler(async function (req, res, next) {
   // user specific info will not display login and signup buttons
   // instead it will show logout
   // user specific info will also decide on display of message field
-
   const messages = await Message.find()
     .populate("anon_user")
     .sort({ createdAt: 1 });
-
   return res.render("chat", {
     title: "Anon Chat Space",
     messages,
