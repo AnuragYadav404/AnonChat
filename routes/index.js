@@ -1,31 +1,25 @@
 const express = require("express");
 const router = express.Router();
+const homeController = require("../controllers/homeController");
+const loginController = require("../controllers/loginController");
+const signupController = require("../controllers/signupController");
+const chatController = require("../controllers/chatController");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.send(
-    "This page implements the homepage.\n It display all the messages, login button, sign up button.\n This page also presents a message form if the user is authenticated."
-  );
-});
+router.get("/", homeController.homepage_get);
 
-router.get("/signup", function (req, res, next) {
-  res.send("This page implements and renders sign-up form.");
-});
+router.get("/signup", signupController.signup_get);
 
-router.post("/signup", function (req, res, next) {
-  res.send("This page implements signup post request.");
-});
+router.post("/signup", signupController.signup_post);
 
-router.get("/login", function (req, res, next) {
-  res.send("This page implements and renders login form.");
-});
+router.get("/login", loginController.login_get);
 
-router.post("/login", function (req, res, next) {
-  res.send("This page implements login post request.");
-});
+router.post("/login", loginController.login_post);
 
-router.post("/message", function (req, res, next) {
-  res.send("This route handles the message post request by a user");
-});
+//\n It display all the messages, login button, sign up button.\n This page also presents a message form if the user is authenticated.
+
+router.get("/chat", chatController.chat_get);
+
+router.post("/chat", chatController.chat_post);
 
 module.exports = router;
