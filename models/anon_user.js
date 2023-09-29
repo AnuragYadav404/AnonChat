@@ -8,6 +8,6 @@ const anonSchema = new Schema({
   salt: { type: String, required: true },
 });
 
-const Anon = connection.model("AnonUsers", anonSchema);
+const AnonUser = connection.model("AnonUser", anonSchema);
 
-module.exports = Anon;
+module.exports = AnonUser;
