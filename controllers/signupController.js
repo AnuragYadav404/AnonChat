@@ -14,13 +14,19 @@ exports.signup_get = function (req, res, next) {
 // validations need to be done
 
 exports.signup_post = [
-  body("username", "Username must be atleast 3 characters long.")
+  body(
+    "username",
+    "Username must be atleast 3 characters long and less than 16 characters."
+  )
     .trim()
-    .isLength({ min: 3 })
+    .isLength({ min: 3, max: 16 })
     .escape(),
-  body("password", "Password must be atleast 8 characters long.")
+  body(
+    "password",
+    "Password must be atleast 8 characters long and less than 16 characters."
+  )
     .trim()
-    .isLength({ min: 8 })
+    .isLength({ min: 8, max: 16 })
     .escape(),
   asyncHandler(async function (req, res, next) {
     const errors = validationResult(req);

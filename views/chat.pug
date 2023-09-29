@@ -11,6 +11,17 @@ block content
     form(action="/signup", method="post") 
         button(type="submit") Sign up
     
+  form(action="", method="post") 
+    label(for="content") Send Message: 
+    textarea#content.form-control(type="textarea",name="content", cols="30", rows="1",placeholder="Enter your message here", required="true", maxLength="1800", minLength="1")     
+    button(type="submit") Send
+
+  hr
+  if errors 
+    ul 
+      each error in errors 
+        li  #{error.msg}
+  hr
+
   each message in messages
     p Message: #{message.content} by #[strong message.anon_user.username]
-    

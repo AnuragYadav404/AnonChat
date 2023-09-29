@@ -17,3 +17,7 @@ block content
         input#password.form-control(type="password", placeholder="Enter your password", name="password", required="true")
     
     button.btn.btn-primary(type="Submit") Submit
+  if errors 
+    ul 
+      each error in errors 
+        li  #{error.msg}

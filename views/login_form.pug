@@ -6,11 +6,15 @@ block content
   form(action="", method="post") 
     .form-group 
         label(for="username") Username: 
-        input#username.form-control(type="text", placeholder="Enter your unique username", name="username", required="true")
+        input#username.form-control(type="text", placeholder="Enter your unique username", name="username", required="true", minLength="3", maxLength="16")
 
     .form-group 
         label(for="password") Password: 
-        input#password.form-control(type="password", placeholder="Enter your password", name="password", required="true")
+        input#password.form-control(type="password", placeholder="Enter your password", name="password", required="true", minLength="8", maxLength="16")
     
     button.btn.btn-primary(type="Submit") Submit
         
+  if errors 
+    ul 
+      each error in errors 
+        li  #{error.msg}
