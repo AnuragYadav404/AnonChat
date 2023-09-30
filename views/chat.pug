@@ -7,14 +7,15 @@ block content
     p You are currently logged-in as #{user.username}
     p #[a(href="/logout") Click here to Logout]
   else 
-    p #[strong You must be logged in to view message authors]
+    p #[strong You must be logged in to send messages]
     p To sign-up visit:- #[a(href="/signup") Sign up ]
     p To login visit:- #[a(href="/login") Log In] 
-    
-  form(action="", method="post") 
-    label(for="content") Send Message: 
-    textarea#content.form-control(type="textarea",name="content", cols="30", rows="1",placeholder="Enter your message here", required="true", maxLength="1800", minLength="1")     
-    button(type="submit") Send
+
+  if user   
+    form(action="", method="post") 
+      label(for="content") Send Message: 
+      textarea#content.form-control(type="textarea",name="content", cols="30", rows="1",placeholder="Enter your message here", required="true", maxLength="1800", minLength="1")     
+      button(type="submit") Send
 
   hr
   if errors 
