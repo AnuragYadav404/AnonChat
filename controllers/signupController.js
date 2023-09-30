@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const connection = require("../config/db_connection");
 const AnonUser = connection.models.AnonUser;
 const genPassword = require("../lib/passwordUtils").genPassword;
+require("dotenv").config();
 
 exports.signup_get = function (req, res, next) {
   res.render("signup_form", {
@@ -28,11 +29,15 @@ exports.signup_post = [
     .trim()
     .isLength({ min: 8, max: 16 })
     .escape(),
+  body("modpass")
+    .trim()
+    .escape()
+    .optional({ values: "falsy" })
+    .equals(process.env.MODPASS)
+    .withMessage("Moderator password is incorrect."),
   asyncHandler(async function (req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log("errors");
-      console.log(errors.array());
       return res.render("signup_form", {
         title: "Sign up for AnonChat",
         errors: errors.array(),
@@ -58,6 +63,9 @@ exports.signup_post = [
           salt: salt,
           hash: hash,
         });
+        if (req.body.modpass) {
+          newUser.isModerator = true;
+        }
         await newUser.save();
         console.log("user created");
         return res.redirect("/login");
