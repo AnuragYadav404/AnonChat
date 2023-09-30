@@ -6,6 +6,7 @@ const signupController = require("../controllers/signupController");
 const chatController = require("../controllers/chatController");
 const logoutController = require("../controllers/logoutController");
 const passport = require("passport");
+const memberSignupController = require("../controllers/memberSignupController");
 
 /* GET home page. */
 router.get("/", homeController.homepage_get);
@@ -93,6 +94,8 @@ router.get("/home", (req, res, next) => {
   return res.redirect("/");
 });
 
+router.get("/member_signup", memberSignupController.memberSignup_get);
+router.post("/member_signup", memberSignupController.memberSignup_post);
 // this is some dummy thing, will be removed at some time
 router.use("/:dummy", (req, res, next) => {
   res.render("escape_matrix");
