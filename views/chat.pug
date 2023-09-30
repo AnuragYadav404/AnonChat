@@ -3,6 +3,8 @@ extends layout
 block content
   h1= title
   if user 
+    p hey Anon
+    p You are currently logged-in as #{user.username}
     p #[a(href="/logout") Click here to Logout]
   else 
     p #[strong You must be logged in to view message authors]
@@ -23,6 +25,6 @@ block content
 
   each message in messages
     if user
-      p Message: #{message.content} by #[strong #{message.anon_user.username}]
+      p Message: #{message.content} by #[strong #{message.anon_user.username}] at #{message.createdAt_formatted}
     else 
       p Message: #{message.content}
