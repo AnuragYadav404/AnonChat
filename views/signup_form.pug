@@ -6,6 +6,7 @@ block content
   .signup-info 
     p Make sure your username is unique! 
     p Password must be atleast 6 characters long 
+    p If signing up as moderator, provide moderator password.
   
   form(action="", method="post") 
     .form-group 
@@ -16,6 +17,11 @@ block content
         label(for="password") Enter your password: 
         input#password.form-control(type="password", placeholder="Enter your password", name="password", required="true" , minLength="8", maxLength="16")
     
+    .form-group 
+        label(for="modpass") Moderator password : 
+        input#modpass.form-control(type="password", placeholder="Enter moderator password", name="modpass", maxLength="16")
+    
+
     button.btn.btn-primary(type="Submit") Submit
   if errors 
     ul 
