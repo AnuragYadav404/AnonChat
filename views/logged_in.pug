@@ -3,8 +3,5 @@ extends layout
 block content
   h1 Chat Anonymous 
   p You are already logged in, To Signup please log out first 
+  p #[a(href="/logout") Click here to Logout]
   p Return to homepage:- #[a(href="/home") home]
-  p You want to logout? 
-  p Click the following button to logout
-  form(action="/logout", method="post") 
-      button(type="submit") Logout

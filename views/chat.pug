@@ -3,8 +3,7 @@ extends layout
 block content
   h1= title
   if user 
-    form(action="/logout", method="post") 
-        button(type="submit") Logout
+    p #[a(href="/logout") Click here to Logout]
   else 
     p #[strong You must be logged in to view message authors]
     p To sign-up visit:- #[a(href="/signup") Sign up ]

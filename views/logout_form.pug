@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Anon Chat!
+  p Chat #[strong anonymously] with anyone and everyone.
+  h3= title 
+  form(action="/logout", method="post") 
+    button(type="submit") Logout
+  

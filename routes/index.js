@@ -55,6 +55,17 @@ router.post(
   })
 );
 
+router.get(
+  "/logout",
+  function (req, res, next) {
+    if (!req.isAuthenticated()) {
+      return res.redirect("/login");
+    }
+    next();
+  },
+  logoutController.logout_get
+);
+
 router.post(
   "/logout",
   function (req, res, next) {
