@@ -24,11 +24,9 @@ router.get(
 router.post(
   "/signup",
   function (req, res, next) {
-    console.log("transferring to signup post");
     if (req.isAuthenticated()) {
       return res.render("logged_in");
     }
-    console.log("transferring to signup post");
     next();
   },
   signupController.signup_post
@@ -90,5 +88,14 @@ router.post(
   },
   chatController.chat_post
 );
+
+router.get("/home", (req, res, next) => {
+  return res.redirect("/");
+});
+
+// this is some dummy thing, will be removed at some time
+router.use("/:dummy", (req, res, next) => {
+  res.render("escape_matrix");
+});
 
 module.exports = router;

@@ -1,6 +1,7 @@
 exports.logout_get = function (req, res, next) {
   res.render("logout_form", {
     title: "Are you sure u want to logout?",
+    user: req.user,
   });
 };
 

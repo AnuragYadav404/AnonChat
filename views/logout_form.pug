@@ -4,6 +4,7 @@ block content
   h1 Anon Chat!
   p Chat #[strong anonymously] with anyone and everyone.
   h3= title 
+  p you are logged in as #[strong #{user.username}]
   form(action="/logout", method="post") 
     button(type="submit") Logout
   
