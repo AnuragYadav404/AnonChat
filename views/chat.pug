@@ -11,6 +11,7 @@ block content
       p You can view message authors and message creation info.
     else 
       p Benefits of being a user is limited.
+      p As a user you can only send messages.
       p Become a member to view message authors and message creation info.
       p #[a(href="/member_signup") Sign up as a member]
     
@@ -33,7 +34,7 @@ block content
   hr
 
   each message in messages
-    if user
-      p Message: #{message.content} by #[strong #{message.anon_user.username}] at #{message.createdAt_formatted}
+    if user && user.isMember
+        p Message: #{message.content} by #[strong #{message.anon_user.username}] at #{message.createdAt_formatted}
     else 
       p Message: #{message.content}
