@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const connection = require("../config/db_connection");
 const AnonUser = connection.models.AnonUser;
+require("dotenv").config();
 
 exports.memberSignup_get = function (req, res, next) {
   // here it has the simple thing of handling of display memeber form
@@ -14,7 +15,8 @@ exports.memberSignup_post = [
   body("memberphrase", "Member phrase was invalid!!!")
     .trim()
     .isLength({ min: 11, max: 11 })
-    .escape(),
+    .escape()
+    .equals(process.env.MEMBER_PHRASE),
   asyncHandler(async function (req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

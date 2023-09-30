@@ -94,8 +94,26 @@ router.get("/home", (req, res, next) => {
   return res.redirect("/");
 });
 
-router.get("/member_signup", memberSignupController.memberSignup_get);
-router.post("/member_signup", memberSignupController.memberSignup_post);
+router.get(
+  "/member_signup",
+  function (req, res, next) {
+    if (!req.isAuthenticated()) {
+      return res.redirect("/login");
+    }
+    next();
+  },
+  memberSignupController.memberSignup_get
+);
+router.post(
+  "/member_signup",
+  function (req, res, next) {
+    if (!req.isAuthenticated()) {
+      return res.redirect("/login");
+    }
+    next();
+  },
+  memberSignupController.memberSignup_post
+);
 // this is some dummy thing, will be removed at some time
 router.use("/:dummy", (req, res, next) => {
   res.render("escape_matrix");
