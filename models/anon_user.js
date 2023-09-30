@@ -7,6 +7,7 @@ const anonSchema = new Schema({
   hash: { type: String, required: true },
   salt: { type: String, required: true },
   isMember: { type: Boolean, default: false },
+  isModerator: { type: Boolean, default: false },
 });
 
 const AnonUser = connection.model("AnonUser", anonSchema);

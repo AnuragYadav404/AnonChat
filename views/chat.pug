@@ -6,7 +6,11 @@ block content
     p hey Anon
     p You are currently logged-in as #{user.username}
     p #[a(href="/logout") Click here to Logout]
-    if(user.isMember)
+    if (user.isModerator)
+      p Hello Moderator! 
+      p You can view message authors and message creation info.
+      p You as a moderator can also delete the message
+    else if (user.isMember)
       p You are a member of this club
       p You can view message authors and message creation info.
     else 
@@ -34,7 +38,13 @@ block content
   hr
 
   each message in messages
-    if user && user.isMember
-        p Message: #{message.content} by #[strong #{message.anon_user.username}] at #{message.createdAt_formatted}
+    if user && user.isModerator 
+      p Message: #{message.content} by #[strong #{message.anon_user.username}] at #{message.createdAt_formatted}
+      form(action="/deleteMessage", method="post")
+            .form-group 
+                input#messageid.form-control(type="hidden" value=message._id required="true" name="messageid") 
+            button.btn.btn-primary(type="submit") Delete  
+    else if user && user.isMember
+      p Message: #{message.content} by #[strong #{message.anon_user.username}] at #{message.createdAt_formatted}
     else 
       p Message: #{message.content}

@@ -7,7 +7,7 @@ const chatController = require("../controllers/chatController");
 const logoutController = require("../controllers/logoutController");
 const passport = require("passport");
 const memberSignupController = require("../controllers/memberSignupController");
-
+const deleteMessageController = require("../controllers/deleteMessageController");
 /* GET home page. */
 router.get("/", homeController.homepage_get);
 
@@ -113,6 +113,19 @@ router.post(
     next();
   },
   memberSignupController.memberSignup_post
+);
+
+router.post(
+  "/deleteMessage",
+  function (req, res, next) {
+    if (!req.isAuthenticated()) {
+      return res.redirect("/login");
+    } else if (!req.user.isModerator) {
+      return res.render("escape_matrix");
+    }
+    next();
+  },
+  deleteMessageController.delete_post
 );
 // this is some dummy thing, will be removed at some time
 router.use("/:dummy", (req, res, next) => {
