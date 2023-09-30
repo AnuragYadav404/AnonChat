@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+
+  h3 Prove your eligibility of becoming a member 
+
+  h3 Enter the secret member phrase to become a member!
+
+  form(action="", method="post") 
+    .form-group 
+        label(for="memberphrase") Enter the secret member phrase: 
+        input#memberphrase.form-control(type="text", placeholder="Enter the secret member phrase", name="memberphrase", required="true" , minLength="1", maxLength="16")
+
+    button.btn.btn-primary(type="Submit") Submit
+  if errors 
+    ul 
+      each error in errors 
+        li  #{error.msg}
