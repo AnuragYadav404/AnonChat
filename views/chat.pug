@@ -6,6 +6,14 @@ block content
     p hey Anon
     p You are currently logged-in as #{user.username}
     p #[a(href="/logout") Click here to Logout]
+    if(user.isMember)
+      p You are a member of this club
+      p You can view message authors and message creation info.
+    else 
+      p Benefits of being a user is limited.
+      p Become a member to view message authors and message creation info.
+      p #[a(href="/member_signup") Sign up as a member]
+    
   else 
     p #[strong You must be logged in to send messages]
     p To sign-up visit:- #[a(href="/signup") Sign up ]
