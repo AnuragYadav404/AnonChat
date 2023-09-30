@@ -6,7 +6,11 @@ block content
     p hey Anon
     p You are currently logged-in as #{user.username}
     p #[a(href="/logout") Click here to Logout]
-    if(user.isMember)
+    if (user.isModerator)
+      p Hello Moderator! 
+      p You can view message authors and message creation info.
+      p You as a moderator can also delete the message
+    else if (user.isMember)
       p You are a member of this club
       p You can view message authors and message creation info.
     else 
